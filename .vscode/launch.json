@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "pwa-msedge",
+            "name": "localhost:8000",
+            "request": "launch",
+            "url": "localhost:8000",
+            "file": "${workspaceFolder}/index.html"
+        }
+    ]
+}
