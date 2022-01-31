@@ -1,25 +1,13 @@
-class TypeQuestion{
-    constructor(question, answer, hint){
-        this.question = question;
-        this.answer = answer;
-        this.hint = hint;
-    }
-};
-
-var questions = [];
-questions.push(new TypeQuestion("我","我","ji3"));
-questions.push(new TypeQuestion("早","早","yl3"));
-questions.push(new TypeQuestion("你","你","su3"));
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getRandomQuestion(){
-    var question = questions[getRandomInt(0, questions.length-1)];
+function getRandomQuestion(questions) {
+    var question = questions[getRandomInt(0, questions.length - 1)];
     return question;
 }
-function create_question(no, ind){
+function create_question(no, ind, questions) {
     var question = questions[ind];
     var question_text = question.question;
     var answer_text = question.answer;
@@ -29,18 +17,18 @@ function create_question(no, ind){
 
     var no_div = document.createElement("div");
     no_div.classList.add("no");
-    no_div.innerHTML = "Q" + (no+1);
+    no_div.innerHTML = "Q" + (no + 1);
     var question_div = document.createElement("div");
     question_div.classList.add("question");
     var answer_div = document.createElement("input");
     answer_div.classList.add("answer");
 
-    answer_div.onkeyup = function(){
+    answer_div.onkeyup = function () {
         console.log(answer_div.value);
-        if (answer_div.value == answer_text){
+        if (answer_div.value == answer_text) {
             answer_div.classList.add("correct");
         }
-        else{
+        else {
             answer_div.classList.remove("correct");
         }
     }
@@ -53,12 +41,12 @@ function create_question(no, ind){
     hint_div.innerHTML = hint_text;
     hint_div.style.display = "none";
 
-    hint_btn.onclick = function(){
+    hint_btn.onclick = function () {
         if (hint_div.style.display === "none") {
             hint_div.style.display = "block";
-          } else {
+        } else {
             hint_div.style.display = "none";
-          }
+        }
     }
     main_div.appendChild(no_div);
     main_div.appendChild(question_div);
@@ -69,24 +57,31 @@ function create_question(no, ind){
     panel_div = document.getElementById("panel2");
     panel_div.appendChild(main_div);
 }
-function reset(){
+function reset(questions) {
+    panel_div = document.getElementById("panel2");
+    panel_div.innerHTML = "";
+    
     var inds = shuffle_indices(questions.length);
-    for(var i=0; i<inds.length; i++){
-        create_question(i, inds[i]);
+    for (var i = 0; i < inds.length; i++) {
+        create_question(i, inds[i], questions);
     }
 }
 
-function shuffle_indices(n){
+function shuffle_indices(n) {
     var indices = [];
-    for (var i=0; i<n; i++){
+    for (var i = 0; i < n; i++) {
         indices.push(i);
     }
-    for (var i=0; i<n; i++){
-        var j = getRandomInt(0, n-1);
+    for (var i = 0; i < n; i++) {
+        var j = getRandomInt(0, n - 1);
         var temp = indices[i];
         indices[i] = indices[j];
         indices[j] = temp;
     }
     return indices;
 }
-$(document).ready(reset);
+// window.onload = reset;
+document.addEventListener("DOMContentLoaded", function () {
+    // includeJs("js/data.js");
+    reset(questions);
+});

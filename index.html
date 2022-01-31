@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="js/jquery-3.6.0.min.js"></script>
+    <!-- <script src="js/jquery-3.6.0.min.js"></script> -->
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
     <style>
         .question{
@@ -55,7 +56,9 @@
 </head>
 <body>
     <img src="data/1200px-Keyboard_layout_Zhuyin.svg.png" alt=""/>
- <div id='panel1'></div>
+ <div id='panel1'>
+     <button type="button" id='reset_btn' onclick="reset(questions)">Reset</button>
+ </div>
  <div id='panel2'></div>   
 </body>
 </html>
